@@ -22,11 +22,14 @@ repositories {
 dependencies {
     // The production code uses Guava
     compile 'com.google.guava:guava:20.0'
+	
+	compile 'io.netty:netty-all:4.1.8.Final'
 
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'
 }
 
 // Define the main class for the application
-mainClassName = 'App'
+//mainClassName = 'App'
+mainClassName = 'io.netty.example.file.NamedPipeServer'
 
