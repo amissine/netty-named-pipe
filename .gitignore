@@ -6,6 +6,9 @@ logs/
 # Ignore Gradle GUI config
 gradle-app.setting
 
+# Ignore files open in vim
+**/*.swp
+
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
 
