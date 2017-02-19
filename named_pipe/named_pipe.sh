@@ -11,8 +11,8 @@ function cleanup {
 }
 trap cleanup SIGINT SIGTERM
 
-echo "named_pipe.sh started on "`date` > named_pipe.log
 PIPE=/tmp/$2.txt
+echo "named_pipe.sh started on "`date`", PIPE="$PIPE > named_pipe.log
 mkfifo $PIPE
 unzip -p $ITCH_FILES_DIR/$1.zip > $PIPE &
 PID_UNZIP=$!
