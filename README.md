@@ -1,5 +1,5 @@
 # netty-named-pipe
-This netty example shows how to use named pipes under Linux and/or Mac OS. It is based on [FileServer](http://netty.io/4.1/xref/io/netty/example/file/FileServer.html) example.
+This netty example shows how to use named pipes under Linux and/or Mac OS. It is based on the [FileServer](http://netty.io/4.1/xref/io/netty/example/file/FileServer.html) example.
 
 ## How to run the example
 You will need three terminal windows to run this example. In the first window, you start the TCP server:
@@ -19,11 +19,12 @@ HELO: Type the path of the file to retrieve.
 Now it is time to start the named pipe in the third terminal window:
 
 ```
-alec@mba ~/project/minetats-all/netty-named-pipe/named_pipe (master) $ ./named_pipe_test.sh && tail -f named_pipe.log 
+alec@mba ~/project/minetats-all/netty-named-pipe/named_pipe (master) $ ./named_pipe_test.sh && \
+          tail -f named_pipe.log 
 named_pipe.sh started on Sun Feb 19 14:28:41 EST 2017, PIPE=/tmp/S043004-v2-1.txt
 PID_UNZIP = 23260
 ```
-Now you copy and paste `/tmp/S043004-v2-1.txt` into the second window (the name of the named pipe) and press Enter (in the second window) to start the example. On my mac, it runs for about 30 seconds. When it stops, you see `Connection closed by foreign host.` in the second window. It is now time to enter Ctrl-C in the first and in the third window to stop the TCP server and the `unzip` process. To complete the cleanup, run `rm /tmp/S043004-v2-1.txt`.
+Now you copy and paste `/tmp/S043004-v2-1.txt` (the name of the named pipe) into the second window and press Enter (in the second window) to start the example. On my mac, it runs for about 30 seconds. When it stops, you see the `Connection closed by foreign host.` message in the second window. It is now time to enter Ctrl-C in the first and in the third window to stop the TCP server and the `unzip` process. To complete the cleanup, run `rm /tmp/S043004-v2-1.txt`.
 
 ## The use case
 The use case behind this example is serving the market feed data (a tiny portion of some historical ITCH in our case) to multiple clients in parallel. The data is being kept in a zip file. When a client requests the feed, a new process starts unzipping the data into a new named pipe. The TCP server reads the data from this named pipe and passes it on to the client.
