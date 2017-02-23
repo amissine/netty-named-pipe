@@ -32,12 +32,16 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.stream.ChunkedInput;
 
 public class NamedPipe implements ChunkedInput<ByteBuf> {
+	  private static final Logger LOGGER = LoggerFactory.getLogger(NamedPipe.class);
 
 	  private RandomAccessFile file;
 	  private int chunkSize;
@@ -90,10 +94,11 @@ public class NamedPipe implements ChunkedInput<ByteBuf> {
 	        buf.writerIndex(buf.writerIndex() + read);
 	        read = file.read(buf.array(), buf.arrayOffset() + read, chunkSize - read);
 	      } while (read > 0);
+	      LOGGER.debug("readChunk: buf.array()=" + new String(buf.array()));
 	      int index = buf.writerIndex() - 1;
 	      if (buf.getByte(index) == '\n' && buf.getByte(index - 1) == '\n') {
 	        endOfInput = true;
-	        System.out.println("endOfInput=" + endOfInput + ", read " + chunks + " chunks");
+	        LOGGER.debug("endOfInput=" + endOfInput + ", read " + chunks + " chunks");
 	      }
 	      return buf;
 	    } finally {

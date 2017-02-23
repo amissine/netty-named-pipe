@@ -27,7 +27,7 @@ PID_UNZIP = 23260
 Now you copy and paste `/tmp/S043004-v2-1.txt` (the name of the named pipe) into the second window and press Enter (in the second window) to start the example. On my mac, it runs for about 30 seconds. When it stops, you see the `Connection closed by foreign host.` message in the second window. It is now time to enter Ctrl-C in the first and in the third window to stop the TCP server and the `unzip` process. To complete the cleanup, run `rm /tmp/S043004-v2-1.txt`.
 
 ## The use case
-The use case behind this example is serving the market feed data (a tiny portion of some historical ITCH in our case) to multiple clients in parallel. The data is being kept in a zip file. When a client requests the feed, a new process starts unzipping the data into a new named pipe. The TCP server reads the data from this named pipe and passes it on to the client.
+The use case behind this example is to serve the market feed data (a tiny portion of some historical ITCH in our case) to multiple clients in parallel. The data is being kept in a zip file. When a client requests the feed, a new process starts unzipping the data into a new named pipe. The TCP server reads the data from this named pipe and passes it on to the client.
 
 I have a project called [Market Feed on Demand](https://docs.google.com/document/d/1QHlrI3dMpesnTSzXpNVuQgpZRZRtslh__NX4PAlumpE/edit) that is based on the approach presented in this example.
 
